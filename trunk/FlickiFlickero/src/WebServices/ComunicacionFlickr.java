@@ -1,20 +1,31 @@
 package WebServices;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class ComunicacionFlickr {
 	
-	public static void getDirectorios(String user_id){
+	public static JSONArray getDirectorios(String user_id) throws JSONException{
+		
+		JSONObject objResponse = new JSONObject();// Obtener de la web
+		JSONArray arrayDirectorios = objResponse.getJSONArray("photoset");
+		return arrayDirectorios;
 		
 	}
 	
-	public static void getFotos(String photoset_id){
+	public static JSONArray getFotos(String photoset_id) throws JSONException{
+		
+		JSONObject objResponse = new JSONObject();// Obtener de la web
+		JSONArray arrayFotos = objResponse.getJSONArray("photo");
+		return arrayFotos;
 		
 	}
 	
-	public static void getComentarios(String photo_id){
-		
-	}
-	
-	public static String getURL(String photoset_id){
-		return null;
+	public static JSONArray getComentarios(String photo_id) throws JSONException{
+
+		JSONObject objResponse = new JSONObject();// Obtener de la web
+		JSONArray arrayComentarios = objResponse.getJSONArray("comment");
+		return arrayComentarios;
 	}
 }

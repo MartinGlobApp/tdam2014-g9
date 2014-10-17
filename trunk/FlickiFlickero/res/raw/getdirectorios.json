@@ -1,0 +1,9 @@
+{ "photosets": { "cancreate": 1, "page": 1, "pages": 1, "perpage": 2, "total": 2, 
+    "photoset": [
+      { "id": "72157648404155399", "primary": "14936952293", "secret": "3265375af9", "server": "5597", "farm": 6, "photos": 1, "videos": 0, 
+        "title": { "_content": "Probando" }, 
+        "description": { "_content": "" }, "needs_interstitial": 0, "visibility_can_see_set": 1, "count_views": 0, "count_comments": 0, "can_comment": 1, "date_create": "1413566823", "date_update": "1413566824" },
+      { "id": "72157648401362557", "primary": "14936942673", "secret": "23efc5176e", "server": "3953", "farm": 4, "photos": 32, "videos": 0, 
+        "title": { "_content": "Bicicleteada Carloz Paz" }, 
+        "description": { "_content": "" }, "needs_interstitial": 0, "visibility_can_see_set": 1, "count_views": 0, "count_comments": 0, "can_comment": 1, "date_create": "1413563186", "date_update": "1413563188" }
+    ] }, "stat": "ok" }

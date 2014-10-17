@@ -7,6 +7,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import WebServices.ComunicacionFlickr;
+
 public class Imagen {
 	
 	public static String TAMAÑO_CUADRADO_PEQUEÑO = "q";
@@ -27,8 +29,7 @@ public class Imagen {
 		farm = objImagen.optInt("farm");
 		title = objImagen.optString("title");
 		
-		JSONObject objResponse = new JSONObject();// Obtener lista de comentarios
-		JSONArray arrayComentarios = objResponse.getJSONArray("comment");
+		JSONArray arrayComentarios = ComunicacionFlickr.getComentarios(id);		
 		comentarios = new ArrayList<Comentario>();
 		for (int i = 0; i < arrayComentarios.length(); i++) {
 			comentarios.add(new Comentario(arrayComentarios.getJSONObject(i)));

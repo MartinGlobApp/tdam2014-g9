@@ -1,12 +1,21 @@
 package Clases;
 
-public class Comentarios {
+import org.json.JSONObject;
+
+public class Comentario {
 	
 	private String id;
 	private String author;
 	private String authorname;
 	private String comment;
 	
+	public Comentario(JSONObject objComentario) {
+		id = objComentario.optString("id");
+		author = objComentario.optString("author");
+		authorname = objComentario.optString("authorname");
+		comment = objComentario.optString("_content");
+	}
+
 	public String getId() {
 		return id;
 	}

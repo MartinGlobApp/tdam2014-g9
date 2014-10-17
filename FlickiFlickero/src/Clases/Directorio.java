@@ -2,6 +2,8 @@ package Clases;
 
 import java.util.List;
 
+import org.json.JSONObject;
+
 public class Directorio {
 
 	private String id;
@@ -10,6 +12,13 @@ public class Directorio {
 	private int cantidadFotos;
 	private List<Imagen> imagenes;
 	
+	public Directorio(JSONObject objDirectorio) {
+		id = objDirectorio.optString("id");
+		primary = objDirectorio.optString("primary");
+		titulo = objDirectorio.optString("title");
+		cantidadFotos = objDirectorio.optInt("photos");
+	}
+
 	public String getId() {
 		return id;
 	}

@@ -1,7 +1,10 @@
 package com.tdam2014.grupo09;
 
+import org.json.JSONException;
+import Clases.Cuenta;
 import android.support.v7.app.ActionBarActivity;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,7 +17,7 @@ public class MainActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		contexto = getApplicationContext();
-		// HOLA CABEZA, hola
+		new AsyncThread_cargarCuenta().execute();
 	}
 
 	@Override
@@ -35,4 +38,29 @@ public class MainActivity extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+    protected class AsyncThread_cargarCuenta extends AsyncTask<Void, Void, Boolean> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Boolean doInBackground(Void ... voids) {
+    		try {
+    			Cuenta cuenta = new Cuenta("128719791@N07");
+    			String a = cuenta.getUser_id();
+    			
+    		} catch (JSONException e) {
+    			e.printStackTrace();
+    		}
+			return true;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            super.onPostExecute(aBoolean);
+        }
+    }
+
 }

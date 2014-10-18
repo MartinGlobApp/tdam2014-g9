@@ -1,8 +1,10 @@
 package Clases;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.client.ClientProtocolException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,18 +24,13 @@ public class Imagen {
 	private String title;
 	private List<Comentario> comentarios;
 	
-	public Imagen(JSONObject objImagen) throws JSONException {
+	public Imagen(JSONObject objImagen) throws JSONException, ClientProtocolException, IOException {
 		id = objImagen.optString("id");
 		secret = objImagen.optString("secret");
 		server = objImagen.optString("server");
 		farm = objImagen.optInt("farm");
 		title = objImagen.optString("title");
-		
-		JSONArray arrayComentarios = ComunicacionFlickr.getComentarios(id);		
-		comentarios = new ArrayList<Comentario>();
-		for (int i = 0; i < arrayComentarios.length(); i++) {
-			comentarios.add(new Comentario(arrayComentarios.getJSONObject(i)));
-		}
+		comentarios = ComunicacionFlickr.getComentarios(id);
 	}
 	
 	public String getId() {
@@ -58,6 +55,10 @@ public class Imagen {
 	
 	public List<Comentario> getComentarios() {
 		return comentarios;
+	}
+	
+	public void setComentarios(List<Comentario> comentarios) {
+		this.comentarios = comentarios;
 	}
 	
 	public String getURL(String tamaño){

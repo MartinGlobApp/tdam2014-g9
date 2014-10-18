@@ -1,22 +1,29 @@
 package com.tdam2014.grupo09;
 
+import java.io.IOException;
+
+import org.apache.http.client.ClientProtocolException;
 import org.json.JSONException;
 import Clases.Cuenta;
 import android.support.v7.app.ActionBarActivity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
-public class MainActivity extends ActionBarActivity {
+public class Activity_Principal extends ActionBarActivity {
 
 	public static Context contexto;
+	TextView hello;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		contexto = getApplicationContext();
+		hello = (TextView) findViewById(R.id.textView_hello);
 		new AsyncThread_cargarCuenta().execute();
 	}
 
@@ -39,27 +46,39 @@ public class MainActivity extends ActionBarActivity {
 		return super.onOptionsItemSelected(item);
 	}
 	
-    protected class AsyncThread_cargarCuenta extends AsyncTask<Void, Void, Boolean> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
+    protected class AsyncThread_cargarCuenta extends AsyncTask<Void, Integer, Boolean> {
 
         @Override
         protected Boolean doInBackground(Void ... voids) {
     		try {
-    			Cuenta cuenta = new Cuenta("128719791@N07");
+    			Cuenta cuenta;
+				cuenta = new Cuenta("128719791@N07");
     			String a = cuenta.getUser_id();
-    			
     		} catch (JSONException e) {
     			e.printStackTrace();
-    		}
+			} catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    		
 			return true;
         }
+        
+		@Override
+		protected void onProgressUpdate(Integer... values){
+			super.onProgressUpdate(values);
+
+		
+		}
 
         @Override
         protected void onPostExecute(Boolean aBoolean) {
             super.onPostExecute(aBoolean);
+            hello.setText("Listo!");
+
         }
     }
 

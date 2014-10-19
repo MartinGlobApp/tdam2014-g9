@@ -236,7 +236,7 @@ int drawable abc_textfield_searchview_holo_light 0x7f020054
 int drawable abc_textfield_searchview_right_holo_dark 0x7f020055
 int drawable abc_textfield_searchview_right_holo_light 0x7f020056
 int drawable ic_launcher 0x7f020057
-int id LinearLayout1 0x7f06003d
+int id LinearLayout1 0x7f06003c
 int id action_bar 0x7f06001c
 int id action_bar_activity_content 0x7f060015
 int id action_bar_container 0x7f06001b
@@ -248,7 +248,7 @@ int id action_context_bar 0x7f06001d
 int id action_menu_divider 0x7f060016
 int id action_menu_presenter 0x7f060017
 int id action_mode_close_button 0x7f060024
-int id action_settings 0x7f06003e
+int id action_settings 0x7f06003f
 int id activity_chooser_view_content 0x7f060025
 int id always 0x7f06000b
 int id beginning 0x7f060011
@@ -269,6 +269,7 @@ int id ifRoom 0x7f06000a
 int id image 0x7f060027
 int id listMode 0x7f060001
 int id list_item 0x7f060029
+int id lista_fragments_directorios 0x7f06003e
 int id middle 0x7f060012
 int id never 0x7f060009
 int id none 0x7f060010
@@ -293,7 +294,7 @@ int id showTitle 0x7f060006
 int id split_action_bar 0x7f06001e
 int id submit_area 0x7f060039
 int id tabMode 0x7f060002
-int id textView_hello 0x7f06003c
+int id textView1 0x7f06003d
 int id title 0x7f06002b
 int id top_action_bar 0x7f060020
 int id up 0x7f060021
@@ -324,9 +325,9 @@ int layout abc_popup_menu_item_layout 0x7f030014
 int layout abc_search_dropdown_item_icons_2line 0x7f030015
 int layout abc_search_view 0x7f030016
 int layout abc_simple_decor 0x7f030017
-int layout activity_main 0x7f030018
-int layout support_simple_spinner_dropdown_item 0x7f030019
-int layout view_inicio 0x7f03001a
+int layout support_simple_spinner_dropdown_item 0x7f030018
+int layout view_inicio 0x7f030019
+int layout view_principal 0x7f03001a
 int menu activity_inicio 0x7f0d0000
 int menu main 0x7f0d0001
 int raw getcomentarios 0x7f050000

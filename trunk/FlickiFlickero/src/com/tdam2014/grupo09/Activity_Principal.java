@@ -1,10 +1,14 @@
 package com.tdam2014.grupo09;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.apache.http.client.ClientProtocolException;
+import org.json.JSONArray;
 import org.json.JSONException;
 import Clases.Cuenta;
+import Clases.Directorio;
+import WebServices.ComunicacionFlickr;
 import android.support.v7.app.ActionBarActivity;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -12,18 +16,22 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
 import android.widget.TextView;
 
 public class Activity_Principal extends ActionBarActivity {
 
 	public static Context contexto;
-	TextView hello;
+	ArrayList<Directorio> list;
+	TextView text;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.view_principal);
 		contexto = getApplicationContext();
-		hello = (TextView) findViewById(R.id.textView_hello);
+		text = (TextView) findViewById(R.id.textView1);
+		list = new ArrayList<Directorio>();
 		new AsyncThread_cargarCuenta().execute();
 	}
 
@@ -46,40 +54,44 @@ public class Activity_Principal extends ActionBarActivity {
 		return super.onOptionsItemSelected(item);
 	}
 	
-    protected class AsyncThread_cargarCuenta extends AsyncTask<Void, Integer, Boolean> {
+    protected class AsyncThread_cargarCuenta extends AsyncTask<Void, Directorio, Boolean> {
 
         @Override
         protected Boolean doInBackground(Void ... voids) {
     		try {
-    			Cuenta cuenta;
-				cuenta = new Cuenta("128719791@N07");
-    			String a = cuenta.getUser_id();
-    		} catch (JSONException e) {
+    			JSONArray jsonArray = ComunicacionFlickr.getDirectorios();
+    			for (int i = 0; i < jsonArray.length(); i++) {
+					publishProgress(new Directorio(jsonArray.getJSONObject(i)));
+    			}
+    		} catch (ClientProtocolException e) {
+    			// TODO Auto-generated catch block
     			e.printStackTrace();
-			} catch (ClientProtocolException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+    		} catch (JSONException e) {
+    			Log.e("ERROR", e.getMessage());
+    			e.printStackTrace();
+    		} catch (IOException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
     		
 			return true;
         }
         
 		@Override
-		protected void onProgressUpdate(Integer... values){
+		protected void onProgressUpdate(Directorio... values){
 			super.onProgressUpdate(values);
-
+			Directorio dire = values[0];
+			String texto = text.getText().toString();
+			texto += dire.getTitulo();
+			text.setText(texto);
+			list.add(dire); 
 		
 		}
 
         @Override
         protected void onPostExecute(Boolean aBoolean) {
             super.onPostExecute(aBoolean);
-            hello.setText("Listo!");
 
         }
     }
-
 }

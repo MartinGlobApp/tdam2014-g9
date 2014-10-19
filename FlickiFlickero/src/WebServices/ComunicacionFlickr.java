@@ -24,6 +24,8 @@ import Complementos.Http;
 
 public class ComunicacionFlickr {
 	public static String user_id;
+	public static String api_key = "3b18a5febdbddfde613bf5910b6d7106";
+	public static String secreto = "afa67275ea4f1314";
 	
 	public static boolean login(String userName, String pass){
 		user_id = "";
@@ -32,11 +34,17 @@ public class ComunicacionFlickr {
 	
 	public static JSONArray getDirectorios() throws JSONException, ClientProtocolException, IOException{
 		//final String strJson = readTextFile(MainActivity.contexto.getResources().openRawResource(R.raw.getdirectorios));
+		user_id = "128719791@N07";
 		ArrayList<Directorio> directorios = new ArrayList<Directorio>();
-		HttpUriRequest request = new HttpGet("https://www.flickr.com/services/api/explore/flickr.photosets.getList");
+		HttpUriRequest request = new HttpGet("https://api.flickr.com/services/rest/");
 		HttpParams parametros = request.getParams();
+		parametros.setParameter("method", "flickr.photosets.getList");
+		parametros.setParameter("api_key", api_key);
 		parametros.setParameter("user_id", user_id);
+		parametros.setParameter("format", "json");
+		parametros.setParameter("nojsoncallback", 1);
 		request.setParams(parametros);
+		String r = request.getURI().getPath();
 		JSONObject objResponse = Http.getResponse(request);
 		JSONObject jsonObject = objResponse.getJSONObject("photosets");
 		return jsonObject.getJSONArray("photoset");

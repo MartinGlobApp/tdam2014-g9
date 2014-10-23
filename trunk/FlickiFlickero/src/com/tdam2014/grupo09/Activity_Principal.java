@@ -6,18 +6,19 @@ import java.util.ArrayList;
 import org.apache.http.client.ClientProtocolException;
 import org.json.JSONArray;
 import org.json.JSONException;
-import Clases.Cuenta;
-import Clases.Directorio;
-import WebServices.ComunicacionFlickr;
-import android.support.v7.app.ActionBarActivity;
+
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.widget.TextView;
+
+import com.tdam2014.grupo09.Clases.Directorio;
+import com.tdam2014.grupo09.Complementos.ComunicacionFlickr;
 
 public class Activity_Principal extends ActionBarActivity {
 

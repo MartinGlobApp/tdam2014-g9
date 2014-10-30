@@ -1,24 +1,73 @@
-<android.support.v4.widget.DrawerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_lista_directorios"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.tdam2014.grupo09.Activity_Principal" >
-    
-	<LinearLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-		<TextView
-		    android:id="@+id/textView1"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:text="Large Text"
-		    android:textAppearance="?android:attr/textAppearanceLarge" />
+        <LinearLayout
+            android:layout_width="match_parent"
+              android:layout_height="46dp"
+            android:orientation="vertical" >
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:background="#222326" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="5"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_launcher" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="left|center"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/textView_titulo_album"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cargando..."
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold" />
+                    
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="5sp" >
+
+            <GridView
+                android:id="@+id/gridView_lista_fotos"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:numColumns="3" >
+            </GridView>
+        </LinearLayout>
     </LinearLayout>
-    
+
     <FrameLayout
         android:id="@+id/lista_fragments_directorios"
         android:layout_width="match_parent"
@@ -26,6 +75,6 @@
         android:layout_gravity="left"
         android:background="#111" >
     </FrameLayout>
-	
-	
-</android.support.v4.widget.DrawerLayout>
+
+</android.support.v4.widget.DrawerLayout>	
+<!-- </android.support.v4.widget.DrawerLayout> -->

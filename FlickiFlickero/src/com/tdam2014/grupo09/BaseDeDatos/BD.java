@@ -12,7 +12,7 @@ public class BD {
 
 	public static SQLiteDatabase GetDB(){
 		if(db == null){
-            db = new SQLiteManager(Activity_Principal.contexto, NAME_DATA_BASE, null, VERSION_NUMBER).getWritableDatabase();
+            db = new SQLiteManager(Activity_Principal.CONTEXTO, NAME_DATA_BASE, null, VERSION_NUMBER).getWritableDatabase();
         }
 		return db;
 	}

@@ -4,30 +4,35 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class SQLiteManager extends SQLiteOpenHelper {
 
-    public static final String TABLE_ACCOUNT_Name = "Accounts";
-    public static final String TABLE_ACCOUNT_COL_id = "AccountId";
-    public static final String TABLE_ACCOUNT_COL_email = "Email";
-    public static final String TABLE_ACCOUNT_COL_type = "Type";
-    public static final String TABLE_ACCOUNT_COL_number = "Number";
-    public static final String TABLE_ACCOUNT_COL_pass = "Pass";
-    public static final String TABLE_ACCOUNT_COL_collegeId = "CollegeId";
-    public static final String TABLE_ACCOUNT_COL_collegeName = "CollegeName";
-    public static final String TABLE_ACCOUNT_COL_userId = "UserId";
-
-    String createAccountsTable = "CREATE TABLE " + TABLE_ACCOUNT_Name +
-            " (" + TABLE_ACCOUNT_COL_id + " INTEGER PRIMARY KEY AUTOINCREMENT" +
-            ", " + TABLE_ACCOUNT_COL_email + " TEXT" +
-            ", " + TABLE_ACCOUNT_COL_type + " TEXT" +
-            ", " + TABLE_ACCOUNT_COL_number + " TEXT" +
-            ", " + TABLE_ACCOUNT_COL_pass + " TEXT" +
-            ", " + TABLE_ACCOUNT_COL_collegeId + " INTEGER" +
-            ", " + TABLE_ACCOUNT_COL_userId + " INTEGER" +
-            ", " + TABLE_ACCOUNT_COL_collegeName + " TEXT" +
+    String createTableDirectorios = "CREATE TABLE Directorios" +
+            " ( id TEXT PRIMARY KEY" +
+            ", _primary TEXT" +
+            ", titulo TEXT" +
+            ", cantidad INTEGER" +
             ")";
 
+    String createTableImagenes = "CREATE TABLE Imagenes" +
+            " ( id TEXT PRIMARY KEY" +
+            ", directorioId TEXT" +
+            ", secret TEXT" +
+            ", server TEXT" +
+            ", farm INTEGER" +
+            ", title TEXT" +
+            ", path TEXT" +
+            ")";
+
+    String createTableComentaris = "CREATE TABLE Comentarios" +
+            " ( id TEXT PRIMARY KEY" +
+            ", imagenId TEXT" +
+            ", author TEXT" +
+            ", authorname TEXT" +
+            ", comment INTEGER" +
+            ")";
+    
     public SQLiteManager(Context contexto, String nombre,
                                CursorFactory factory, int version) {
         super(contexto, nombre, factory, version);
@@ -35,7 +40,9 @@ public class SQLiteManager extends SQLiteOpenHelper {
  
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(createAccountsTable);
+        db.execSQL(createTableImagenes);
+        db.execSQL(createTableComentaris);
+        db.execSQL(createTableDirectorios);
     }
  
     @Override

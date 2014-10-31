@@ -1,36 +1,85 @@
 package com.tdam2014.grupo09.BaseDeDatos;
 
-import android.content.ContentValues;
-import android.database.Cursor;
+import java.io.ObjectOutputStream.PutField;
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+
+import android.content.ContentValues;
+import android.database.Cursor;
+
+import com.tdam2014.grupo09.Clases.Comentario;
 import com.tdam2014.grupo09.Clases.Directorio;
+import com.tdam2014.grupo09.Clases.Imagen;
 
 public class ControllerBD {
 
     public static void insertarDirectorio(Directorio directorio){
-            ContentValues valuesTransaccion = new ContentValues();/*
-            valuesTransaccion.put(SQLiteManager.TABLE_ACCOUNT_COL_email, account.get_email());
-            valuesTransaccion.put(SQLiteManager.TABLE_ACCOUNT_COL_type, account.get_type());
-            valuesTransaccion.put(SQLiteManager.TABLE_ACCOUNT_COL_number, account.get_number());
-            valuesTransaccion.put(SQLiteManager.TABLE_ACCOUNT_COL_pass, account.get_pass());
-            valuesTransaccion.put(SQLiteManager.TABLE_ACCOUNT_COL_collegeId, account.get_college().get_idCollege());
-            valuesTransaccion.put(SQLiteManager.TABLE_ACCOUNT_COL_collegeName, account.get_college().get_name());
-            valuesTransaccion.put(SQLiteManager.TABLE_ACCOUNT_COL_userId, account.getUserId());
-            BD.GetDB().insert(SQLiteManager.TABLE_ACCOUNT_Name, null, valuesTransaccion);*/
+            ContentValues valuesTransaccion = new ContentValues();
+            valuesTransaccion.put("id", directorio.getId());
+            valuesTransaccion.put("_primary", directorio.getPrimary());
+            valuesTransaccion.put("titulo", directorio.getTitulo());
+            valuesTransaccion.put("cantidad", directorio.getCantidadFotos());
+            BD.GetDB().insert("Directorios", null, valuesTransaccion);
     }
 
-/*    public static Account getAccount(int accountId){
-       Account account = null;
-        try{
-            Cursor cursor = BD.GetDB().rawQuery("SELECT * FROM " + SQLiteManager.TABLE_ACCOUNT_Name +
-                    " WHERE " + SQLiteManager.TABLE_ACCOUNT_COL_id + " = " +  accountId ,null);
-            if (cursor.moveToFirst()){
-                do {
-                    account = new Account(cursor);
-                }while(cursor.moveToNext());
-            }
-        }catch (Exception ex){ }
-        return account;
-    }*/
+    public static void insertarImagenes(Imagen imagen){
+        ContentValues valuesTransaccion = new ContentValues();
+        valuesTransaccion.put("id", imagen.getId());
+        valuesTransaccion.put("directorioId", imagen.getDirectorioId());
+        valuesTransaccion.put("secret", imagen.getSecret());
+        valuesTransaccion.put("server", imagen.getServer());
+        valuesTransaccion.put("farm", imagen.getFarm());
+        valuesTransaccion.put("title", imagen.getTitulo());
+        valuesTransaccion.put("path", imagen.getPath());
+        BD.GetDB().insert("Imagenes", null, valuesTransaccion);
+    }
+
+    public static void insertarComentarios(Comentario comentario){
+        ContentValues valuesTransaccion = new ContentValues();
+        valuesTransaccion.put("id", comentario.getId());
+        valuesTransaccion.put("imagenId", comentario.getImagenId());
+        valuesTransaccion.put("author", comentario.getAuthor());
+        valuesTransaccion.put("authorname", comentario.getAuthorname());
+        valuesTransaccion.put("comment", comentario.getComment());
+        BD.GetDB().insert("Comentarios", null, valuesTransaccion);
+    }
+    
+	public static ArrayList<Directorio> getDirectorios(){
+		ArrayList<Directorio> result = new ArrayList<Directorio>();
+		Cursor cursor = BD.GetDB().rawQuery("SELECT * FROM Directorios" , null);
+	    if (cursor.moveToFirst()){
+	        do {
+	        	result.add(new Directorio(cursor));
+	        }while(cursor.moveToNext());
+	    
+		}
+	    return result;
+	}
+	
+	public static ArrayList<Imagen> getImagenes(String photoset_id, Boolean ordenado) {
+		ArrayList<Imagen> result = new ArrayList<Imagen>();
+		Cursor cursor = BD.GetDB().rawQuery("SELECT * FROM Imagenes WHERE directorioId = '"+ photoset_id +"'" +
+		((ordenado)? "ORDER BY title" : ""), null);
+	    if (cursor.moveToFirst()){
+	        do {
+	        	result.add(new Imagen(cursor));
+	        }while(cursor.moveToNext());
+	    
+		}
+	    return result;
+		
+	}
+	
+	public static ArrayList<Comentario> getComentarios(String photo_id) {
+		ArrayList<Comentario> result = new ArrayList<Comentario>();
+		Cursor cursor = BD.GetDB().rawQuery("SELECT * FROM Comentarios WHERE imagenId = '"+ photo_id +"'", null);
+	    if (cursor.moveToFirst()){
+	        do {
+	        	result.add(new Comentario(cursor));
+	        }while(cursor.moveToNext());
+	    
+		}
+	    return result;
+	}
 }
